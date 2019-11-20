@@ -1,0 +1,76 @@
+<%= render 'layouts/toolbar' %>
+<section class="container-fluid">
+  <!--Tab feeds va discover-->
+  <div class="row">
+    <%= render '/layouts/tab_feeds' %>
+    <article class="tab-content col-md-9 p-0 mt-5" >
+      <div class="col-sm-8 col-lg-10 bg-white">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <h3 class="pt-4"><b>New Album</b></h3>
+              <hr>
+            </div>
+          </div>
+          <%= simple_form_for album,html: { multipart: true}, remote: true do |f| %>
+            <%= f.error_notification %>
+            <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+            <div class="form-inputs">
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label>Title</label>
+                    <%= f.text_field :title, class:"form-control", placeholder:"Enter photo title" %>
+                  </div>
+                  <div class="form-group">
+                    <label>Sharing Mode</label>
+                    <%= f.select(:sharing_mode, options_for_select([['Public', true], ['Private', false]]), {}, {class: "form-control w-50"}) %>
+                  </div>
+                </div>
+                <div class=" col-12 col-lg-6">
+                  <div class="form-group">
+                    <label>Desription</label>
+                    <%= f.text_area :description, class:"form-control",rows:"6", placeholder:"Enter description" %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col images">
+                  <% if album.image_albums.any? %>
+                    <% album.image_albums.each do |img| %>
+                        <div id="image_<%= img.id %>">
+                          <div class="float-left m-2">
+                            <div ng-repeat="file in imagefinaldata" class="img-wrp">
+                              <%= image_tag img.image_url, {class:"size-my-photos"} %>
+                              <%= link_to delete_image_attachment_album_url(img.id), method: :delete do %>
+                                <img class="btn-close-album m-1" src="/assets/close.png" />
+                              <% end %>
+                            </div>
+                          </div>
+                        </div>
+                    <% end %>
+                  <% end %>
+                  <div class="upload-btn-wrapper float-left size-my-photos m-2">
+                    <%= f.fields_for :image_albums do |p| %>
+                      <div class="field size-my-photos">
+                        <button class="btn-upload"><img src="/assets/plus4.png"></button>
+                        <%= p.file_field :image, multiple: true, name: "image_albums[image][]", class: "upload-image btn-upload" %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions row mt-5 m-1">
+              <%= f.submit "Save", class:"btn btn-submit mr-2" %>
+              <%= link_to album, method: :delete,
+                                 data: { confirm: 'Are you sure?' } do %>
+                <button class=" btn btn-delete ml-2"> <i class="far fa-trash-alt"></i> Delete</button>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

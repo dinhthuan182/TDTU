@@ -1,0 +1,4 @@
+//render button like
+$("#album_<%= @album.id %>").html("<%= escape_javascript(render 'home_page/like_form_album', post: @album) %>");
+//update like quantity
+$("#count_album_<%= @album.id %>").html("<b> <%= @album.likes.size %></b>");

@@ -1,0 +1,12 @@
+<div id="photo_<%= post.id %>">
+  <% pre_like = post.likes.find { |like| like.user == current_user} %>
+  <% if pre_like %>
+    <%= link_to photo_like_path(post,pre_like), method: :delete, remote: true  do %>
+      <img class="btn-like" src="/assets/like.png">
+    <% end %>
+  <% else %>
+    <%= link_to photo_likes_path(post), method: :post, remote: true do %>
+      <img class="btn-like" src="/assets/heart.png">
+    <% end %>
+  <% end %>
+</div>

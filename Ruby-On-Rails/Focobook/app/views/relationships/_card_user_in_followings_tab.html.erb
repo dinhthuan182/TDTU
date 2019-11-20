@@ -1,0 +1,28 @@
+<div class="col-12 col-sm-6 col-lg-3 p-1" id="following_<%= user.id %>_<%= current_user.id %>">
+  <div class="card rounded-sm">
+    <div class="d-flex justify-content-center mt-3">
+      <img class="card-img-top rounded-circle avatar-profile" src="<%= user.avatar.url() %>" alt="Card image" >
+    </div>
+    <div class="card-body text-center" style="height: 230px;">
+      <h4 class="card-title"><b><%= user.full_name %> </b></h4>
+      <ul class="nav d-inline-flex">
+        <li class="m-2"><a class="nav-link" data-toggle="tab" href="#"><b><%= user.photos.count %><br><small>PHOTOS</small></b></a></li>
+        <li class="m-2"><a class="nav-link" data-toggle="tab" href="#"><b><%= user.albums.count %><br><small>ALBUMS</small></b></a></li>
+      </ul>
+      <%unless current_user.id == user.id %>
+        <div id="following_form_<%= user.id %>">
+          <% if current_user.following?(user) %>
+            <%= form_for(current_user.active_relationships.find_by(followed_id: user.id),html: { method: :delete },remote: true) do |f| %>
+              <%= f.submit "Unfollow", class: "btn btn-warning mt-4 following" %>
+            <% end %>
+          <% else %>
+            <%= form_for(current_user.active_relationships.build, remote: true) do |f| %>
+              <div><%= hidden_field_tag :followed_id, user.id %></div>
+              <%= f.submit "Follow", class: "btn mt-4 follow text-warning" %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

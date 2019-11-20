@@ -1,0 +1,21 @@
+<% provide(:title, "Manager Photos") %>
+<%= render 'layouts/toolbar' %>
+<section class="container-fluid">
+    <div class="row ">
+      <%= render 'tab_manager' %>
+
+      <article class="col-md-8 p-0 bg-white pt-5" >
+        <!--tab managePhotos-->
+        <div class="container tab-pane ">
+          <div class="row">
+            <% @photos.each do |photo|  %>
+              <%= render 'photo_show', photo: photo %>
+            <% end %>
+          </div>
+          <div class="d-flex justify-content-center mt-3">
+            <%= will_paginate @photos, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label:"<<", next_label: ">>", inner_window: 0, outer_window: 0, remote: true %>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>

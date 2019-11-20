@@ -1,0 +1,40 @@
+<% provide(:title, "Feeds") %>
+<%= render 'layouts/toolbar' %>
+<%= render 'layouts/view_modal' %>
+<section class="container-fluid p-0">
+    <!--Tab feeds va discover-->
+    <div class="row">
+      <%= render '/layouts/tab_feeds'%>
+
+      <article class="tab-content col-md-8 p-0 bg-white" >
+        <!-- feeds Page-->
+        <div id="feedsPage" class="container-fluid tab-pane active p-0">
+          <div class="d-flex justify-content-center mb-2">
+                <ul class="nav nav-tabs btn-group btn-group-md pt-3">
+                  <li class="nav-item btn btn-white">
+                      <a class="navbar-brand active" data-toggle="tab" href="#photoFeeds"><b>PHOTO</b></a>
+                  </li>
+                  <li class="nav-item btn btn-primary">
+                      <a class="navbar-brand text-white" data-toggle="tab" href="#albumFeeds"><b>ALBUM</b></a>
+                  </li>
+                </ul>
+          </div>
+          <!-- end button PHOTO and ALBUM-->
+
+          <div class="container-fluid tab-pane active">
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <!-- tab hinh anh -->
+              <div class="container-fluid tab-pane active" id="photoFeeds">
+                <%= render 'photo_tab', photos: @photos_feeds, home: false %>
+              </div>
+              <!--  tab album -->
+              <div class="container-fluid tab-pane fade" id="albumFeeds">
+                      <%= render 'album_tab', albums: @albums_feeds, home: false %>
+              </div> <!-- end tab contents -->
+            </div>
+          </div>
+        </div> <!--end teb feedsPage-->
+      </article>
+    </div>
+  </section>

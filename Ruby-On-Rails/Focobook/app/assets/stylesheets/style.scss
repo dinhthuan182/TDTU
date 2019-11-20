@@ -1,0 +1,57 @@
+header {
+  overflow: hidden;
+  background-color: #184785;
+}
+section {
+  background-color: #bec2c5;
+}
+.note {
+  position: absolute;
+  right: 0;
+  width: 300px;
+}
+.follow {
+  border: 3px solid #ff8d00;
+  border-radius: 28px;
+}
+.following{
+  border: 3px solid #ff8d00;
+  border-radius: 28px;
+}
+#avatar_top {
+  height: 40px;
+  width: 40px;
+}
+
+
+.size-image {
+  height: 250px;
+  border-radius:5px;
+}
+
+.img-view {
+  transition: transform .2s;
+}
+.img-view:hover{
+  transform: scale(1.1);
+}
+
+.img-view:active{
+  transform: scale(0.5);
+}
+.btn-follow {
+  border-radius: 28px;
+  width: 95px;
+  height: 35px;
+  background-color: #ffc107;
+  color: white;
+  border-color: #ffc107;
+}
+.btn-follow:hover {
+  transform: scale(1.1)
+}
+.size-modal {
+  height: 650px;
+}
+
+

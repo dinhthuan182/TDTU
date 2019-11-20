@@ -1,0 +1,58 @@
+<% provide(:title, "New album") %>
+<%= render 'layouts/toolbar' %>
+<section class="container-fluid">
+  <!--Tab feeds va discover-->
+  <div class="row">
+    <%= render '/layouts/tab_feeds' %>
+    <article class="tab-content col-md-9 mt-2" >
+      <div class="col-sm-8 col-lg-10 bg-white">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <h3 class="pt-4"><b>New Album</b></h3>
+              <hr>
+            </div>
+          </div>
+          <%= simple_form_for @album, html: { multipart: true }, remote: true do |f| %>
+            <%= f.error_notification %>
+            <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+            <div class="form-inputs">
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label>Title</label>
+                    <%= f.text_field :title, class:"form-control", placeholder:"Enter photo title" %>
+                  </div>
+                  <div class="form-group">
+                    <label>Sharing Mode</label>
+                    <%= f.select(:sharing_mode, options_for_select([['Public', true], ['Private', false]]), {}, {class: "form-control w-50"}) %>
+                  </div>
+                </div>
+                <div class=" col-12 col-lg-6">
+                  <div class="form-group">
+                    <label>Desription</label>
+                    <%= f.text_area :description, class:"form-control",rows:"6", placeholder:"Enter description" %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col images ">
+                  <%= image_tag(@album.images_url) if @album.images? %>
+                    <div class="upload-btn-wrapper float-left size-my-photos m-2">
+                      <div class="field size-my-photos">
+                        <button class="btn-upload"><img src="/assets/plus4.png"></button>
+                        <%= f.file_field :images, multiple: true, class: "btn-upload" %>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions row mt-5 m-1">
+              <%= f.submit "Save", class:"btn btn-submit mr-2" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+<div class="row d-flex" id="photos_tab">
+  <% photos.each do |photo| %>
+    <% if !photo.sharing_mode == false %>
+      <div class="col-sm-12 col-md-12 col-lg-6  d-flex mt-2" id="post_photo_<%= photo.user.id %>" >
+        <div class="container-fluid m-1 border rounded">
+          <div class="row">
+            <%= link_to photo_path(photo), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_photo', class: 'col-12 col-sm-12 col-md-6 p-1'} do %>
+              <div class=" size-albums">
+                <img class="rounded-lg w-100 h-100 pr-2" src="<%= url_for(photo.image) %>">
+              </div>
+            <% end %>
+            <div class="col-md-6">
+              <div class="mt-1">
+                <%unless current_user.id == photo.user.id %>
+                  <div id="follow_form_feeds_photo_<%= photo.user.id %>">
+                    <% if home %>
+                      <%= render 'follow_home', user: photo.user %>
+                    <% end %>
+                  </div>
+                <% end %>
+                <a href="<%= user_path(photo.user) %>" class="nav-link d-inline-flex p-0">
+                  <img src="<%= photo.user.avatar %>" class="rounded-circle" id="avatar_top">
+                  <p class="text-primary pt-2 pl-2"><b><%= photo.user.full_name %></b></p>
+                </a>
+              </div>
+              <div class="style-post">
+                <h4><b><%= photo.title %></b></h4>
+                <p><%= photo.description %></p>
+              </div>
+              <div class="container d-inline pl-0 b-line">
+                <div class="d-inline-flex">
+                  <%= render 'like_form_photo', post: photo %>
+                  <p id="count_photo_<%= photo.id %>" class="like-number"><b> <%= photo.likes.size %></b></p>
+                </div>
+                <small class="pt-3 pr-2 float-right "><%= photo.created_at.strftime("%I:%M %p %-d/%-m/%Y") %></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="d-flex justify-content-center mt-3">
+  <%= will_paginate photos, params_name: 'page_photos', renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label:"<<", next_label: ">>", inner_window: 0, outer_window: 0, params: {active: 'page_photos'} %>
+</div>

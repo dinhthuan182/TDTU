@@ -1,0 +1,34 @@
+<% provide(:title, "Log in") %>
+<%= render 'layouts/toolbar' %>
+<h1 class="text-center text-primary"><b>Fakebook Log in</b></h1>
+<div class="form-sign-up">
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-group mt-3 text-center">
+      <img src="/assets/logoLogin.png" alt="Avatar" class=" rounded-circle mt-2 img-responsive">
+    </div>
+    <div class="form-inputs f-sign-up">
+      <%= f.email_field :email,
+                  class: 'form-control',
+                  placeholder: "Enter username",
+                  required: false,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" } %>
+      <%= f.password_field :password,
+                  class: 'form-control',
+                  placeholder:"Enter password",
+                  required: false,
+                  input_html: { autocomplete: "current-password" } %>
+    </div>
+
+    <div class="form-actions text-center mb-4">
+      <%= f.button :submit, "Log in", class:"btn btn-primary" %>
+    </div>
+    <div class="mt-5 text-center mb-1">
+      <a href="">Fogot password?</a>
+    </div>
+  <% end %>
+</div>
+<div class="new-account">
+  <a href="/users/sign_up">Create an account</a>
+</div>
+

@@ -1,0 +1,9 @@
+<div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+  <div class="admin-photos d-flex justify-content-center m-2 text-center">
+    <img class="rounded-sm admin-photos photo-show" src="<%= url_for(photo.image) %>">
+    <p class="rounded bg-secondary p-1 title-show"><%= photo.title %></b></p>
+    <%= link_to edit_photo_path(photo) do%>
+      <i class="fas fa-edit bg-secondary icon-edit"></i>
+    <% end %>
+  </div>
+</div>

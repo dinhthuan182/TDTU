@@ -1,0 +1,99 @@
+<% provide(:title, "Edit user") %>
+<%= render 'layouts/toolbar' %>
+
+<section class="container-fluid bg-secondary p-0">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="container mt-3">
+        <div class="navbar navbar-expand-md navbar-light bg-lignt p-0">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class=" collapse navbar-collapse p-0" id="collapsibleNavbar">
+            <ul class="navbar-nav nav nav-tabs flex-column">
+              <li class="nav-item p-0">
+                <a class="nav-link text-primary" data-toggle="tab" href="#managePhotos"><b>Manage Photos</b></a>
+              </li>
+              <li class="nav-item p-0">
+                <a class="nav-link text-primary" data-toggle="tab" href="#manageAlbums"><b>Manage Albums</b></a>
+              </li>
+              <li class="nav-item p-0">
+                <a class="nav-link text-primary" data-toggle="tab" href="#ManageUsers"><b>Manage Users</b></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <article class=" col-md-8 bg-white" >
+      <div class="d-flex justify-content-between">
+        <h2 class="h2-title">Edit User Profile</h2>
+        <div class="btn-back">
+          <button class="btn btn-primary">Back</button>
+        </div>
+
+      </div>
+        <hr>
+        <%= form_for(@user) do |f| %>
+          <div class="form-group row">
+            <div class="col-md-3"></div>
+            <div class="col-md-5 fix-position" >
+              <div class="input-file-container">
+                <img class=" avatar-show" src="/assets/img1.jpeg" id="image">
+                <%= f.file_field :avatar, class:"input-file btn-change", id:"my-file", onchange:"showImage.call(this);" %>
+                <label tabindex="0" for="my-file" class="input-file-trigger">CHANGE</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-3"></div>
+            <div class="col-md-5">
+              <h4 class="text-primary">Basic information</h4>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="changeFirstName" class="col-md-3 col-form-label d-flex justify-content-end"><b>First name</b></label>
+            <div class="col-md-5">
+              <%= f.text_field :first_name, class:"form-control", id:"editFirstName", placeholder:"first name", required: true, autofocus: true %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="changeLastName" class="col-md-3 col-form-label d-flex justify-content-end"><b>Last name</b></label>
+            <div class="col-md-5">
+              <%= f.text_field :last_name, class:"form-control", id:"editLastName", placeholder:"last name", required: true, autofocus: true %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="changeEmail" class="col-md-3 col-form-label d-flex justify-content-end"><b>Email</b></label>
+            <div class="col-md-5">
+              <%= f.text_field :email, class:"form-control", id:"editEmail", placeholder:"email", required: true, autofocus: true %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="changePassword" class="col-md-3 col-form-label d-flex justify-content-end"><b>Password</b></label>
+            <div class="col-md-5">
+              <%= f.password_field :password,
+                          placeholder:"Enter New password",
+                          class:"form-control",
+                          required: false,
+                          input_html: { autocomplete: "new-password" } %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="active" class="col-md-3 col-form-label d-flex justify-content-end"><b>Active?</b></label>
+            <div class="col-md-1">
+              <%= f.check_box :activated, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-3"></div>
+            <div class="col-md-5">
+              <%= f.submit "Save", class:"btn btn-success" %>
+            </div>
+          </div>
+        <% end %>
+    </article>
+
+  </div>
+</section>

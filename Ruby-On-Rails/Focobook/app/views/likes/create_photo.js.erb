@@ -1,0 +1,4 @@
+//render button like
+$("#photo_<%= @photo.id %>").html("<%= escape_javascript(render 'home_page/like_form_photo', post: @photo) %>");
+//update like quantity
+$("#count_photo_<%= @photo.id %>").html("<b> <%= @photo.likes.size %></b>");

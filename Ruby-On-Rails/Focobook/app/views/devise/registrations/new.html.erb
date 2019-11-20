@@ -1,0 +1,52 @@
+<% provide(:title, "Sign up") %>
+<%= render 'layouts/toolbar' %>
+<h1 class="text-center text-primary"><b>Fakebook Sign up</b></h1>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+<div class="form-sign-up">
+
+  <div class="form-inputs f-sign-up">
+    <b><%= f.label :first_name %></b><br>
+    <%= f.text_field :first_name,
+                class:"form-control",
+                id:"firstName",
+                placeholder:"Enter first name",
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "name" }%><br>
+    <b><%= f.label :last_name %></b><br>
+    <%= f.text_field :last_name,
+                class:"form-control",
+                placeholder:"Enter last name",
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "name" }%><br>
+    <b><%= f.label :email %></b><br>
+    <%= f.email_field :email,
+                class:"form-control",
+                placeholder:"Enter email",
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" }%><br>
+    <b><%= f.label :password %></b><br>
+    <%= f.password_field :password,
+                class:"form-control",
+                placeholder:"Enter password",
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %><br>
+    <b><%= f.label :password_confirmation %></b><br>
+    <%= f.password_field :password_confirmation,
+                class:"form-control",
+                placeholder:"Enter password confirmation",
+                required: true,
+                input_html: { autocomplete: "new-password" } %><br>
+  </div>
+
+  <div class="form-actions text-center mb-4">
+    <%= f.button :submit, "Sign up", class:"btn btn-primary" %>
+  </div>
+</div>
+<% end %>
+

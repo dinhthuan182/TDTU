@@ -1,0 +1,44 @@
+<% provide(:title, "Manager Users") %>
+<%= render 'layouts/toolbar' %>
+<section class="container-fluid">
+    <div class="row ">
+      <%= render 'tab_manager' %>
+
+      <article class="col-md-8 p-0 bg-white pt-5" >
+        <!--tab ManageUsers-->
+        <div class="container tab-pane">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Last Login</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <% if !user.admin %>
+                  <tr>
+                    <th scope="row"><%= user.first_name %></th>
+                    <td><%= user.last_name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.last_sign_in_at %></td>
+                    <td>
+                      <%= link_to "Edit", edit_user_path(user), class: "btn btn-success mr-2"%>
+                      <%= link_to "Delete", user, method: :delete, class: "btn btn-danger"%>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-center mt-3">
+            <%= will_paginate @users, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label:"<<", next_label: ">>", inner_window: 0, outer_window: 0, remote: true %>
+          </div>
+        </div>
+        <!--end tab ManageUsers-->
+      </article>
+    </div>
+  </section>

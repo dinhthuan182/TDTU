@@ -1,0 +1,109 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+h2, h1 {
+  margin-top:5%;
+}
+.avatar-profile {
+  width: 170px;
+  height: 170px;
+}
+.size-my-photos {
+  height: 230px;
+  width: 230px;
+  border-radius:5px;
+}
+.btn-lock {
+  position: absolute;
+  z-index: 1;
+  margin-left: 187px;
+  opacity: 0.6;
+}
+.btn-edit {
+  position: absolute;
+  z-index: 2;
+  margin-top: 188px;
+  margin-left: 160px;
+  opacity: 0.6;
+}
+.btn-radius {
+  border-radius: 28px;
+}
+.form-sign-up {
+  margin: auto;
+  margin-top: 20px;
+  padding-top:30px;
+  width: 25%;
+  height: 30%;
+  border: 1px solid #A0A0A0;
+  border-radius: 10px;
+  background-color: #ECECEC;
+}
+form input[type=email], form input[type=password], form input[type=text] {
+  border: 1px solid #A0A0A0;
+  border-radius: 5px;
+}
+.f-sign-up {
+  margin: 3% 10%;
+}
+.input-file-container {
+  position: relative;
+  width: 100px;
+}
+.js {
+  .input-file-trigger {
+    display: block;
+    padding: 5px 5px;
+    margin-top: 160px;
+    margin-left: 65px;
+    position: absolute;
+    z-index: 2;
+    background: white;
+    color: black;
+    font-size: 1em;
+    transition: all .4s;
+    cursor: pointer;
+    opacity: 0.4;
+  }
+  .input-file {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100px;
+    opacity: 0;
+    padding: 14px 0;
+    cursor: pointer;
+  }
+  .input-file:hover + .input-file-trigger,
+  .input-file:focus + .input-file-trigger,
+  .input-file-trigger:hover,
+  .input-file-trigger:focus {
+    background: white;
+    opacity: 0.8;
+  }
+}
+
+.login-form {
+  margin: auto;
+  margin-top: 5%;
+  width: 25%;
+  height: 50%;
+  border: 1px solid #A0A0A0;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #ECECEC;
+}
+.login-form input[type=email], .loginForm input[type=password] {
+  width: 90%;
+  border: 1px solid #A0A0A0;
+  border-radius: 5px;
+  margin-left: 5%;
+}
+.login-form h2 {
+  color:#184785;
+}
+.new-account {
+  text-align: center;
+}
+

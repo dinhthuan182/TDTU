@@ -1,0 +1,77 @@
+// Place all the styles related to the photos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+button.btn-upload {
+  width:100%;
+  height: 100%;
+  border: 3px dashed #a78f8f;
+  color: gray;
+  background-color: #d6bfbf24;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.upload-btn-wrapper input[type=file] {
+  font-size: 600px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+input.btn-submit {
+  background-color: green;
+  color: white;
+  transition: transform .2s;
+
+}
+input.btn-submit:hover{
+  background-color: #0080008f;
+}
+input.btn-submit:active{
+  background-color: #0080008f;
+  transform: scale(1.05);
+}
+
+.btn-upload img {
+  height: 165px;
+  with: 165px;
+  opacity:0.3;
+}
+.btn-delete {
+  background-color: red;
+  color: white;
+  transition: transform .2s;
+}
+.btn-delete:hover {
+  background-color: #ff0000a8;
+  color: white;
+}
+
+.btn-delete:active {
+  background-color: #ff0000a8;
+  color: white;
+  transform: scale(1.05);
+}
+.upload-btn-wrapper:hover {
+  transition: transform .2s;
+  transform: scale(0.95);
+}
+.img-wrp {
+  display: inline-block;
+  position: relative;
+}
+.btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+}

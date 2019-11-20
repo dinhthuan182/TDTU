@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript">
+    var conversion = {
+                        "USD_VND": {
+                           "val": 23255.814
+                        },
+                        "EUR_VND": {
+                          "val": 26084.8837
+                        }
+                      }
+    function convertToVnd() {
+      var type = document.getElementsByName('value');
+      type2 = document.getElementById("moneySelect").value;
+      console.log(type2);
+      val = parseInt(document.getElementById("amount").value);
+      for(i = 0; i < type.length; i++) {
+        if(type[i].checked) {
+          valMoney =type[i].value;
+        };
+      };
+      if (valMoney == "usd") {
+        c = conversion.USD_VND.val;
+      }else{
+        c = conversion.EUR_VND.val;
+      };
+      x = val * c;
+      document.getElementById("result").innerHTML = x.toFixed(0);
+    };
+    function callApi(currency) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://free.currencyconverterapi.com/api/v6/convert?q=' + currency + '_VND&compact=y');
+  xhr.onload = function() {
+      if (xhr.status === 200) {
+          updateResults(JSON.parse(xhr.responseText));
+      }
+      else {
+          alert('Request failed.  Returned status of ' + xhr.status);
+      }
+  };
+  xhr.send();
+}
+  </script>
+</head>
+<body>
+  <h1>Currency Converter</h1>
+  <h4>Select input currency</h4>
+  <select id="moneySelect">
+    <option value="usd">USD</option>
+    <option value="eur">EUR</option>
+    <option value="gbp">GBP</option>
+    <option value="cad">CAD</option>
+  </select>
+    <input type="radio" name="value" value="usd"> USD<br>
+    <input type="radio" name="value" value="eur"> EUR<br>
+    <input type="number" id="amount">
+    <button id="convert" onclick= "convertToVnd()">Convert Currency</button>
+
+  <div>
+    <h5>Result: </h5>
+    <span id="result"></span>
+  </div>
+  <p>Converted number</p>
+</body>
+</html>

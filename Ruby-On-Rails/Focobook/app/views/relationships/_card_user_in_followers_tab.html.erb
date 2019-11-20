@@ -1,0 +1,18 @@
+<div class="col-12 col-sm-6 col-lg-3 p-1" id="follower_<%= current_user.id %>_<%= user.id %>">
+  <div class="card rounded-sm">
+    <div class="d-flex justify-content-center mt-3">
+      <img class="card-img-top rounded-circle avatar-profile" src="<%= current_user.avatar.url() %>" alt="Card image" >
+    </div>
+    <div class="card-body text-center" style="height: 230px;">
+     <h4 class="card-title"><b><%= current_user.full_name %> </b></h4>
+      <ul class="nav d-inline-flex">
+        <li class="m-2">
+          <a class="nav-link" data-toggle="tab" href="user_path(user)"><b><%= current_user.photos.count %><br><small>PHOTOS</small></b></a>
+        </li>
+        <li class="m-2">
+          <a class="nav-link" data-toggle="tab" href="user_path(user)"><b><%= current_user.albums.count %><br><small>ALBUMS</small></b></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

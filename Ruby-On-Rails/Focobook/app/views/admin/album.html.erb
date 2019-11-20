@@ -1,0 +1,21 @@
+<% provide(:title, "Manager Albums") %>
+<%= render 'layouts/toolbar' %>
+<section class="container-fluid">
+    <div class="row ">
+      <%= render 'tab_manager' %>
+
+      <article class="col-md-8 p-0 bg-white pt-5" >
+        <!--tab manageAlbums-->
+        <div class="container tab-pane mt-3">
+          <div class="row">
+            <% @albums.each do |album| %>
+              <%= render 'album_show', album: album %>
+            <% end %>
+          </div>
+          <div class="d-flex justify-content-center mt-3">
+            <%= will_paginate @albums, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label:"<<", next_label: ">>", inner_window: 0, outer_window: 0, remote: true %>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>

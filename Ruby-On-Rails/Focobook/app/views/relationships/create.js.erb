@@ -1,0 +1,15 @@
+// render nut unfollow
+$("#follow_form_<%= @user.id %>").html("<%= escape_javascript(render 'users/unfollow', user: @user) %>");
+$("#following_form_<%= @user.id %>").html("<%= escape_javascript(render 'users/unfollow', user: @user) %>");
+$("#follower_form_<%= @user.id %>").html("<%= escape_javascript(render 'users/unfollow', user: @user) %>");
+// cap nhat tab followers va following
+$("#followers_tab_<%= @user.id %>").html('<b><%= @user.followers.count %></b><small> <b>FOLLOWERS</b></small>');
+$("#followings_tab_<%= current_user.id %>").html('<b><%= current_user.followings.count %></b><small> <b>FOLLOWING</b></small>');
+//tao card user trong tab following cua current user
+$("#moreFollowing_<%= current_user.id %>").prepend("<%= escape_javascript(render 'card_user_in_followings_tab', user: @user) %>");
+//tao card user trong tab follower cua user
+$("#moreFollowers_<%= @user.id %>").prepend("<%= escape_javascript(render 'card_user_in_followers_tab', user: @user) %>");
+
+//thay doi nut follow tai trang home page
+$("div#follow_form_feeds_photo_<%= @user.id %>").html("<%= escape_javascript(render('btn_unfollow_feeds_photo', user: @user)) %>");
+$("div#follow_form_feeds_album_<%= @user.id %>").html("<%= escape_javascript(render('btn_unfollow_feeds_album', user: @user)) %>");

@@ -1,0 +1,122 @@
+<% provide(:title, "Edit profile") %>
+<%= render 'layouts/toolbar' %>
+<section class="container-fluid">
+  <!--Tab feeds va discover-->
+  <div class="row">
+    <%= render '/layouts/tab_feeds' %>
+    <div class="col-md-8 bg-white">
+      <div class="container">
+        <div class="d-flex justify-content-between mt-3">
+          <h2>Edit <%= resource_name.to_s.humanize %></h2>
+          <%= link_to 'Cancel', :back, class:"btn btn-primary" %>
+        </div>
+        <hr>
+        <%= simple_form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put }) do |f| %>
+          <%= f.error_notification %>
+          <div class="form-inputs">
+            <div class="form-group row">
+              <div class="col-md-3"></div>
+              <div class="col-md-5" style="height: 210px;">
+                <div class="input-file-container" style="display: block;">
+                  <img class="rounded-lg" src="<%= @user.avatar %>" width="200px" height="200px" style="position: absolute; z-index: 0;" id="image" >
+                  <%= f.file_field :avatar, class:"input-file", id:"my-file", style:"position: absolute; z-index: 1; margin-top: 160px;", onchange:"showImage.call(this);" %>
+                  <label tabindex="0" for="my-file" class="input-file-trigger">CHANGE</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-3"></div>
+              <div class="col-md-5">
+                <h4 class="text-primary">Basic information</h4>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="editFirstName" class="col-md-3 col-form-label d-flex justify-content-end"><b>First name</b></label>
+              <div class="col-md-5">
+                <%= f.text_field :first_name, class:"form-control", id:"editFirstName", placeholder:"first name", required: true, autofocus: true %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="editLastName" class="col-md-3 col-form-label d-flex justify-content-end"><b>Last name</b></label>
+              <div class="col-md-5">
+                <%= f.text_field :last_name, class:"form-control", id:"editLastName", placeholder:"last name", required: true, autofocus: true %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="editEmail" class="col-md-3 col-form-label d-flex justify-content-end"><b>Email</b></label>
+              <div class="col-md-5">
+                <%= f.text_field :email, class:"form-control", id:"editEmail", placeholder:"email", required: true, autofocus: true %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-3"></div>
+            <div class="col-md-5">
+              <%= f.button :submit, "Save", class:"btn btn-success" %>
+            </div>
+          </div>
+          <br>
+        <% end %>
+
+        <div class="container">
+          <%= simple_form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-group row">
+              <div class="col-md-3"></div>
+              <div class="col-md-5">
+                <h4 class="text-primary">Change password</h4>
+              </div>
+            </div>
+            <div class="form-inputs">
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+              <% end %>
+              <div class="form-group row">
+                <label for="currentPsw" class="col-md-3 col-form-label d-flex justify-content-end"><b>Current Password</b></label>
+                <div class="col-md-5">
+                  <%= f.password_field :current_password,
+                          placeholder:"Enter Current password",
+                          class:"form-control",
+                          required: true,
+                          input_html: { autocomplete: "current-password" } %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="newPsw" class="col-md-3 col-form-label d-flex justify-content-end"><b>New Password</b></label>
+                <div class="col-md-5">
+                  <%= f.password_field :password,
+                          placeholder:"Enter New password",
+                          class:"form-control",
+                          required: false,
+                          input_html: { autocomplete: "new-password" } %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="newPswC" class="col-md-3 col-form-label d-flex justify-content-end"><b>New Password</b></label>
+                <div class="col-md-5">
+                  <%= f.password_field :password_confirmation,
+                          placeholder:"Enter New password",
+                          class:"form-control",
+                          required: false,
+                          input_html: { autocomplete: "new-password" } %>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-3"></div>
+              <div class="col-md-5">
+                <%= f.button :submit, "Save", class:"btn btn-success" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+

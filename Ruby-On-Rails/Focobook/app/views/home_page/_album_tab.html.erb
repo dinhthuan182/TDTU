@@ -1,0 +1,55 @@
+<div class="row" id="albums_tab">
+  <% albums.each do |album| %>
+    <% if !album.sharing_mode == false %>
+      <div class="col-sm-12 col-md-6 p-0 mt-2 d-flex" >
+        <div class="container-fluid m-2 border rounded">
+          <div class="row">
+            <%= link_to album_path(album), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#modal_album'} do %>
+            <div class="col-12 col-sm-12 col-lg-6 mt-3 w-100" data-toggle="modal" data-target="#modalAlbum">
+              <div class="size-photos d-flex justify-content-center m-0">
+                <% album.images.each_with_index do |photo, index| %>
+                  <% if (index != album.images.length - 1) && (index < 4)  %>
+                    <% a = (index*3+3).to_s %>
+                    <%= image_tag photo.url, {class:"rounded-sm size-photos", style:"position: absolute; z-index: index; transform: rotate("+ a +"deg)"} %>
+                  <% else %>
+                    <%= image_tag photo.url, {class:"rounded-sm size-photos", style:"position: absolute; z-index: index;"} %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+            <div class="col-lg-6 pr-0 mt-2">
+              <div>
+                <%unless current_user.id == album.user.id %>
+                  <div id="follow_form_feeds_album_<%= album.user.id %>">
+                    <% if home %>
+                    <%= render 'follow_home', user: album.user %>
+                    <% end %>
+                  </div>
+                <% end %>
+                <a href="<%= user_path(album.user) %>" class="nav-link d-inline-flex p-0">
+                  <img src="<%= album.user.avatar %>" class="rounded-circle" id="avatar_top">
+                  <p class="text-primary pt-2 pl-2"><b><%= album.user.full_name %></b></p>
+                </a>
+              </div>
+              <div class="pr-2 style-post" data-toggle="modal" data-target="#modalAlbum">
+                <h4><b><%= album.title %></b></h4>
+                <p><%= album.description %></p>
+              </div>
+              <div class="container d-inline pl-0 b-line">
+                <div class="d-inline-flex">
+                  <%= render 'like_form_album', post: album %>
+                  <p id="count_album_<%= album.id %>"class="like-number"><b> <%= album.likes.size %></b></p>
+                </div>
+                <small class="pt-3 float-right "><%= album.created_at.strftime("%I:%M %p %-d/%-m/%Y") %></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="d-flex justify-content-center mt-3">
+  <%= will_paginate albums, params_name: 'page_albums', renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label:"<<", next_label: ">>", inner_window: 0, outer_window: 0 %>
+</div>

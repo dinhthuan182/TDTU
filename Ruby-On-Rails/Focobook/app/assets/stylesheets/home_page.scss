@@ -1,0 +1,45 @@
+.size-photos {
+  height: 270px;
+  width: 270px;
+}
+.size-albums {
+  height: 280px;
+  width: 300px;
+}
+.btn-like {
+  height: 35px;
+  width: 35px;
+}
+.b-line {
+  bottom: 5px;
+}
+
+.follow-home {
+  width: 76px;
+  height: 30px;
+  border: 3px solid #ff8d00;
+  color: #ff8d00;
+  border-radius: 28px;
+  font-size: 12px;
+  float: right;
+}
+.following-home{
+  width: 76px;
+  height: 30px;
+  border: 3px solid #ff8d00;
+  background-color: #ff8d00;
+  border-radius: 28px;
+  font-size: 9px;
+  color: white;
+  float: right;
+}
+
+.follow-home:hover {
+  transform: scale(1.1)
+}
+.style-post {
+  height: 170px;
+}
+.like-number {
+  font-size: 24px;
+}

@@ -1,0 +1,46 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h4><b><%= album.title %></b></h4>
+  <button type="button" class="close" data-dismiss="modal">×</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div id="show_album" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+      <% album.images.each_with_index do |photo, index| %>
+        <% if index != 0 %>
+          <li data-target="#show_album" data-slide-to=index></li>
+        <% else %>
+          <li data-target="#show_album" data-slide-to="0" class="active"></li>
+        <% end %>
+      <% end %>
+    </ul>
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+      <% album.images.each_with_index do |photo, index| %>
+        <% if index != 0 %>
+          <div class="carousel-item">
+            <img class="size-modal w-100" src="<%= photo.url %>" alt="Load image false">
+          </div>
+        <% else %>
+          <div class="carousel-item active">
+            <img class="size-modal w-100" src="<%= photo.url %>" alt="Load image false">
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#show_album" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#show_album" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+  </div>
+</div>
+<!-- Modal footer -->
+<div class="modal-header">
+  <p><%= album.description %></p>
+</div>

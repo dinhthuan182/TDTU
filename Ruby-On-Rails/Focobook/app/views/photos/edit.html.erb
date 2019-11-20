@@ -1,0 +1,91 @@
+<% provide(:title, "Edit Photo") %>
+<%= render 'layouts/toolbar' %>
+<section class="container-fluid">
+    <!--Tab feeds va discover-->
+    <div class="row">
+      <%= render '/layouts/tab_feeds' %>
+
+      <article class="tab-content col-md-10 p-0 mt-5" >
+         <div class="col-sm-8 col-lg-9 bg-white">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12">
+                  <h3 class="pt-4"><b>Edit Photo</b></h3>
+                  <hr>
+                </div>
+              </div>
+
+              <%= simple_form_for(@photo) do |f| %>
+                <% if @photo.errors.any? %>
+                  <div id="error_explanation">
+                    <h4><%= pluralize(@photo.errors.count, "error") %> prohibited this user from being saved:</h4>
+                    <ul>
+                    <% @photo.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+                <div class="form-inputs">
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-lg-6">
+                      <div class="form-group">
+                        <label>Title</label>
+                        <%= f.text_field :title, class:"form-control", placeholder:"Enter photo title" %>
+                      </div>
+
+                      <div class="form-group w-50">
+                        <label>Sharing Mode</label>
+                        <%= f.select(:sharing_mode, options_for_select([['Public', true], ['Private', false]]), {}, {class: "form-control"}) %>
+                      </div>
+
+                    </div>
+
+                    <div class=" col-12 col-lg-6">
+                      <div class="form-group">
+                        <label>Desription</label>
+                        <%= f.text_area :description, class:"form-control",rows:"6", placeholder:"Enter description" %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col image">
+
+                        <% if !@photo.image.attached? %>
+                          <div class="upload-btn-wrapper float-left size-my-photos">
+                            <div class="btn-upload size-my-photos" style="display: block;">
+                              <button class="btn-upload"><img src="/assets/plus4.png"></button>
+                              <%= f.file_field :image, class:"btn-upload", onchange:"showImagePhoto.call(this)" %>
+                            </div>
+                          </div>
+                      <% else %>
+                            <div class="float-left">
+                              <div ng-repeat="file in imagefinaldata" class="img-wrp size-my-photos">
+                                <%= image_tag @photo.image, {class:"size-my-photos"} if @photo.image.attached? %>
+                                <img class="btn-close m-1" src="/assets/close.png" onclick="clickClose.call(this)" />
+                              </div>
+                              <div class="upload-btn-wrapper float-left size-my-photos" style="display: none;">
+                                <div class="btn-upload size-my-photos">
+                                <button class="btn-upload"><img src="/assets/plus4.png"></button>
+                                  <%= f.file_field :image, class:"btn-upload", onchange:"showImagePhoto.call(this)" %>
+                                </div>
+                              </div>
+                            </div>
+                        <% end %>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="form-actions row mt-5 m-1">
+                  <%= f.button :submit, "Save", class:"btn btn-submit mr-2" %>
+                  <%= link_to @photo, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <button class=" btn btn-delete ml-2"> <i class="far fa-trash-alt"></i> Delete</button>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </article>
+      </div>
+</section>

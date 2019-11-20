@@ -1,0 +1,52 @@
+<header class="row">
+  <div class="col-0 col-sm-2 col-md-2">
+    <a href="<%= root_path %>" class="navbar-brand text-white mt-2 float-right"><h4><b>
+      <% if !current_user.nil? && current_user.admin %>
+        Focobook Admin
+      <% else %>
+        Focobook
+      <% end %>
+  </b></h4></a>
+  </div>
+  <div class="col-12 col-sm-3 col-md-6">
+    <input class="form-control mt-2 w-75" type="search" placeholder="Search Photo/Album" aria-label="Search">
+  </div>
+  <% if !current_user.nil? %>
+    <div class="col-sm-4 col-md-2">
+      <a href="<%= user_path(current_user.id) %>" class="nav-link d-inline-flex text-white m-0 float-right">
+        <img src="<%=current_user.avatar.url() %>" class="rounded-circle mr-2" id="avatar_top">
+        <p class="text-white pt-2 m-0"><b><%= current_user.full_name %></b></p>
+      </a>
+    </div>
+    <% if current_user.admin %>
+      <div class="col-sm-1 col-md-1">
+        <a href="/managers/photo" class="nav-link text-white pt-3 m-0 float-right"><b>Manager</b></a>
+      </div>
+    <% end %>
+    <div class="col-sm-1 col-md-1">
+      <a href="/users/sign_out" data-method="delete" class="nav-link text-white pt-3 m-0 float-right"><b>Logout</b></a>
+    </div>
+  <% else %>
+    <div class="col-sm-3 col-md-1">
+    </div>
+    <div class="col-sm-1 col-md-1">
+      <a href="/users/sign_up" class="nav-link text-white pt-3 m-0 float-right"><b>Sign up</b></a>
+    </div>
+    <div class="col-sm-1 col-md-1">
+      <a href="/users/sign_in" class="nav-link text-white pt-3 m-0 float-left"><b>Log in</b></a>
+    </div>
+  <% end %>
+</header>
+
+<% if notice %>
+  <div class="toast rounded float-right note " data-autohide="false" id="notice" >
+    <div class="toast-header">
+      <strong class="mr-auto">Notification</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </div>
+    <div class="toast-body">
+      <%= notice %>
+    </div>
+  </div>
+<% end %>

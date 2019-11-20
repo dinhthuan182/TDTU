@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title> w1</title>
+  <style type="text/css">
+    body {
+     background-image: url("bg1.gif");
+     background-repeat: no-repeat;
+     height: 100%;
+     width: 100%;
+     background-color: #cccccc;
+     text-align: center;
+    };
+  </style>
+  <script type="text/javascript">
+    var max = 100;
+    var min = 1;
+    var yourRandoom = Math.ceil(Math.random()*(max-min+1)+min);
+    var pastResult = '';
+    var count = 10;
+    function myFunction() {
+      count--;
+      console.log(yourRandoom);
+      var yourInput = document.getElementById('inputNumber').value;
+      if (yourInput < 0 || yourInput > 100) {
+        document.getElementById('result').innerHTML = "Please type number from 0 to 100. You have "+ count +" guesses left";
+        document.getElementById('result').style.backgroundColor="red";
+      }else if (yourInput > yourRandoom) {
+        document.getElementById('result').innerHTML = "Your number is too higher. You have "+ count +" guesses left";
+        document.getElementById('result').style.backgroundColor="red";
+      }else if (yourInput < yourRandoom) {
+        document.getElementById('result').innerHTML = "Your number is too lower. You have "+ count +" guesses left";
+        document.getElementById('result').style.backgroundColor="red";
+      }else {
+        document.getElementById('result').innerHTML = "YOU ARE THE LORD OF THE GUESSES GAME";
+        document.getElementById('result').style.backgroundColor="green";
+        alert(
+          'YOU ARE THE LORD OF THE GUESSES GAME'
+        );
+        location.reload();
+      };
+      if (count == 0) {
+        alert(
+          'You lose. Your correct is: '+ yourRandoom +', please reload game.'
+        );
+        location.reload();
+      };
+      pastResult = pastResult + yourInput +'<br>';
+      document.getElementById('pResult').innerHTML = pastResult;
+    };
+  </script>
+</head>
+<body>
+  <h1>Guess King</h1>
+  <h3 id="result" style="width: 50%; margin-left: 25%;">Please type any number</h3>
+  <input type="number" id="inputNumber" min="0" max="100">
+  <button class="submit" onclick="myFunction()">Guess</button>
+  <h4>pass result</h4>
+  <p id="pResult"></p>
+
+
+</body>
+</html>
